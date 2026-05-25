@@ -31,9 +31,18 @@ yarn.lock
 # Python
 __pycache__/
 *.pyc
+*.pyo
 venv/
 .venv/
+*.egg-info/
+.eggs/
 
 # Office temp files
 ~$*
 *.tmp
+
+# Temp files
+read_docx.py
+read_doc.ps1
+read_docx.ps1
+project_plan.docx

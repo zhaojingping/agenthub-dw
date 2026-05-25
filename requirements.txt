@@ -1,0 +1,30 @@
+# Web Framework
+fastapi==0.115.0
+uvicorn[standard]==0.30.0
+python-multipart==0.0.9
+
+# Database
+sqlalchemy==2.0.35
+asyncpg==0.29.0
+alembic==1.13.0
+
+# LangGraph & AI
+langgraph==0.2.0
+langchain==0.3.0
+langchain-openai==0.2.0
+langchain-core==0.3.0
+
+# OpenTelemetry
+opentelemetry-api==1.27.0
+opentelemetry-sdk==1.27.0
+opentelemetry-instrumentation-fastapi==0.48b0
+
+# Utils
+pydantic==2.9.0
+pydantic-settings==2.5.0
+python-dotenv==1.0.0
+httpx==0.27.0
+
+# Testing
+pytest==8.3.0
+pytest-asyncio==0.24.0
