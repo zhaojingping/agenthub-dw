@@ -1,9 +1,21 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.core.config import get_settings
+from src.services.scheduler import scheduler
 
 settings = get_settings()
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    await scheduler.start()
+    yield
+    # Shutdown
+    await scheduler.stop()
 
 
 def create_app() -> FastAPI:
@@ -12,6 +24,7 @@ def create_app() -> FastAPI:
         description="公共传播 Agent Hub - AI 驱动的舆情监测与危机应对平台",
         version="0.1.0",
         debug=settings.app_debug,
+        lifespan=lifespan,
     )
 
     # CORS
@@ -29,8 +42,7 @@ def create_app() -> FastAPI:
         return {"status": "ok", "version": "0.1.0"}
 
     # Register routers
-    from src.api import sentiment, monitoring
-    app.include_router(sentiment.router, prefix="/api/v1", tags=["sentiment"])
+    from src.api import monitoring
     app.include_router(monitoring.router, prefix="/api/v1", tags=["monitoring"])
 
     return app
